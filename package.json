@@ -1,0 +1,39 @@
+{
+  "name": "cosmic-blueprint",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:sandbox": "wrangler pages dev dist --ip 0.0.0.0 --port 3000",
+    "dev:d1": "wrangler pages dev dist --d1=cosmic-blueprint-production --local --ip 0.0.0.0 --port 3000",
+    "build": "vite build",
+    "preview": "wrangler pages dev dist",
+    "deploy": "npm run build && wrangler pages deploy dist",
+    "deploy:prod": "npm run build && wrangler pages deploy dist --project-name cosmic-blueprint",
+    "cf-typegen": "wrangler types --env-interface CloudflareBindings",
+    "clean-port": "fuser -k 3000/tcp 2>/dev/null || true",
+    "test": "curl http://localhost:3000",
+    "db:migrate:local": "wrangler d1 migrations apply cosmic-blueprint-production --local",
+    "db:migrate:prod": "wrangler d1 migrations apply cosmic-blueprint-production",
+    "db:seed": "wrangler d1 execute cosmic-blueprint-production --local --file=./seed.sql",
+    "db:reset": "rm -rf .wrangler/state/v3/d1 && npm run db:migrate:local && npm run db:seed",
+    "db:console:local": "wrangler d1 execute cosmic-blueprint-production --local",
+    "db:console:prod": "wrangler d1 execute cosmic-blueprint-production",
+    "git:init": "git init && git add . && git commit -m 'Initial commit'",
+    "git:commit": "git add . && git commit -m",
+    "git:status": "git status",
+    "git:log": "git log --oneline"
+  },
+  "dependencies": {
+    "axios": "^1.7.9",
+    "hono": "^4.10.7",
+    "stripe": "^17.5.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250705.0",
+    "@hono/vite-cloudflare-pages": "^0.4.2",
+    "typescript": "^5.7.3",
+    "vite": "^6.3.5",
+    "wrangler": "^4.4.0"
+  }
+}

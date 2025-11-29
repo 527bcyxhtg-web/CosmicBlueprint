@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "cosmic-blueprint",
+  "compatibility_date": "2024-01-01",
+  "pages_build_output_dir": "./dist",
+  "compatibility_flags": ["nodejs_compat"],
+  
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "cosmic-blueprint-production",
+      "database_id": "YOUR_DATABASE_ID"
+    }
+  ],
+  
+  // Note: Environment variables are loaded from .dev.vars for local development
+  // For production, use: wrangler secret put KEY_NAME
+  "vars": {
+    "APP_URL": "http://localhost:3000"
+  }
+}
