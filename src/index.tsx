@@ -288,64 +288,37 @@ app.get('/api/orders/:orderId/status', async (c) => {
 // FRONTEND ROUTE - Placeholder minimal HTML
 // ============================================
 
-app.get('/', (c) => {
-  return c.html(`
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cosmic Blueprint - Payment Integration Ready</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <style>
-          body { background: #000; color: #fff; font-family: sans-serif; }
-          .neon { color: #CCFF00; text-shadow: 0 0 10px #CCFF00; }
-        </style>
-    </head>
-    <body class="p-8">
-        <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-5xl font-bold mb-6">
-                <span class="neon">🚀 Cosmic Blueprint</span>
-            </h1>
-            <h2 class="text-3xl mb-8">Payment Integration: READY! ✅</h2>
-            
-            <div class="grid md:grid-cols-2 gap-6 mb-12">
-                <div class="bg-gray-900 p-6 rounded-lg border border-green-500">
-                    <h3 class="text-2xl mb-4 neon">✅ Stripe Integration</h3>
-                    <p class="text-gray-300">Full Stripe Checkout Sessions</p>
-                    <p class="text-gray-300">Webhook handling</p>
-                    <p class="text-gray-300">Order tracking</p>
-                </div>
-                
-                <div class="bg-gray-900 p-6 rounded-lg border border-yellow-500">
-                    <h3 class="text-2xl mb-4 neon">✅ Revolut Integration</h3>
-                    <p class="text-gray-300">Merchant API ready</p>
-                    <p class="text-gray-300">Lower fees (0.8%)</p>
-                    <p class="text-gray-300">EU optimized</p>
-                </div>
-            </div>
-            
-            <div class="bg-blue-900 p-6 rounded-lg mb-8">
-                <h3 class="text-2xl mb-4">📋 Next Steps:</h3>
-                <ol class="text-left max-w-2xl mx-auto space-y-2">
-                    <li>1️⃣ Add your Stripe API keys to .dev.vars</li>
-                    <li>2️⃣ Add your Revolut API keys to .dev.vars</li>
-                    <li>3️⃣ Run: npm run build</li>
-                    <li>4️⃣ Run: pm2 start ecosystem.config.cjs</li>
-                    <li>5️⃣ Test checkout flow!</li>
-                </ol>
-            </div>
-            
-            <div class="text-sm text-gray-400">
-                <p>📚 Documentation: REVOLUT_SETUP.md & PAYMENT_SETUP.md</p>
-                <p>🔧 API Endpoints: /api/config/payment</p>
-            </div>
-        </div>
-        
-        <script src="/static/app.js"></script>
-    </body>
-    </html>
+app.get('/', async (c) => {
+  // Read full HTML from file
+  const html = await fetch('https://raw.githubusercontent.com/527bcyxhtg-web/CosmicBlueprint/main/frontend_full.html').then(r => r.text()).catch(() => `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cosmic Blueprint - Unlock Your Stars</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        :root{--neon:#CCFF00;--neon-glow:rgba(204,255,0,0.6)}*{margin:0;padding:0;box-sizing:border-box}body{background:#000;color:#fff;font-family:'Inter',sans-serif;overflow-x:hidden}h1,h2,h3{font-family:'Playfair Display',serif}.neon-text{color:var(--neon);text-shadow:0 0 20px var(--neon-glow)}.gradient-bg{background:linear-gradient(135deg,#000 0%,#1a0033 50%,#000 100%)}.btn-primary{background:var(--neon);color:#000;font-weight:600;transition:all .3s;cursor:pointer}.btn-primary:hover{box-shadow:0 0 30px var(--neon-glow);transform:scale(1.05)}.card-3d{transition:transform .3s;cursor:pointer}.card-3d:hover{transform:translateY(-10px)}.modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.9);z-index:9999;align-items:center;justify-content:center}.modal.active{display:flex!important}@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}.float{animation:float 3s ease-in-out infinite}#chat-widget{position:fixed;bottom:20px;right:20px;z-index:9998}#chat-button{width:60px;height:60px;border-radius:50%;background:var(--neon);color:#000;display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;box-shadow:0 4px 20px var(--neon-glow)}#chat-box{display:none;position:absolute;bottom:70px;right:0;width:350px;height:500px;background:#1a1a1a;border-radius:16px;border:2px solid var(--neon);flex-direction:column}#chat-box.active{display:flex!important}
+    </style>
+</head>
+<body>
+<nav class="fixed w-full z-50 backdrop-blur-md border-b border-gray-800"><div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center"><div class="flex items-center space-x-2"><i class="fas fa-star neon-text text-2xl"></i><span class="text-xl font-bold neon-text">Cosmic Blueprint</span></div><div class="hidden md:flex items-center space-x-6"><a href="#tarot" class="hover:text-yellow-400 transition">🔮 Free Tarot</a><a href="#numerology" class="hover:text-yellow-400 transition">🔢 Numerology</a><a href="#packages" class="btn-primary px-6 py-2 rounded-full">View Packages</a></div></div></nav>
+<section id="hero" class="gradient-bg min-h-screen flex items-center justify-center px-4 pt-20"><div class="text-center max-w-4xl"><div class="float mb-8"><i class="fas fa-moon text-6xl neon-text"></i></div><h1 class="text-5xl md:text-7xl font-bold mb-6">Unlock the <span class="neon-text">Secrets</span><br>Written in Your Stars</h1><p class="text-xl md:text-2xl text-gray-300 mb-8">Get your personalized astrology reading powered by AI</p><div class="flex flex-col md:flex-row gap-4 justify-center"><a href="#packages" class="btn-primary px-8 py-4 rounded-full text-lg">Get Your Reading Now ✨</a><a href="#tarot" class="bg-gray-800 px-8 py-4 rounded-full text-lg hover:bg-gray-700 transition">Try Free Tarot 🔮</a></div></div></section>
+<section id="tarot" class="py-20 px-4"><div class="max-w-4xl mx-auto text-center"><h2 class="text-4xl font-bold mb-4">🔮 <span class="neon-text">FREE</span> Tarot Reading</h2><p class="text-gray-400 mb-8">Draw a card and discover your guidance for today</p><div id="tarot-card" class="w-48 h-72 mx-auto mb-8 bg-gradient-to-br from-purple-900 to-pink-900 rounded-xl flex items-center justify-center text-6xl cursor-pointer card-3d" onclick="drawTarot()"><i class="fas fa-hand-sparkles"></i></div><button onclick="drawTarot()" class="btn-primary px-8 py-3 rounded-full">Draw a Card</button><div id="tarot-result" class="mt-8 p-6 bg-gray-900 rounded-xl hidden"><h3 class="text-2xl font-bold mb-2 neon-text" id="tarot-card-name"></h3><p class="text-gray-300" id="tarot-card-meaning"></p></div></div></section>
+<section id="numerology" class="py-20 px-4 bg-gray-900"><div class="max-w-4xl mx-auto text-center"><h2 class="text-4xl font-bold mb-4">🔢 <span class="neon-text">FREE</span> Numerology Calculator</h2><p class="text-gray-400 mb-8">Calculate your Life Path Number</p><div class="max-w-md mx-auto space-y-4"><input type="date" id="birth-date" class="w-full p-4 bg-gray-800 rounded-lg text-white border border-gray-700 focus:border-yellow-400 focus:outline-none"><button onclick="calculateNumerology()" class="btn-primary w-full py-4 rounded-lg">Calculate My Number</button></div><div id="numerology-result" class="mt-8 p-6 bg-gray-800 rounded-xl hidden"><div class="text-6xl font-bold neon-text mb-4" id="life-path-number"></div><h3 class="text-2xl font-bold mb-2">Your Life Path Number</h3><p class="text-gray-300" id="numerology-meaning"></p></div></div></section>
+<section id="packages" class="py-20 px-4"><div class="max-w-7xl mx-auto"><h2 class="text-4xl md:text-5xl font-bold text-center mb-4">Choose Your <span class="neon-text">Cosmic Journey</span></h2><p class="text-center text-gray-400 mb-12">Select the perfect reading package for you</p><div class="grid md:grid-cols-3 gap-8"><div class="card-3d bg-gray-900 p-8 rounded-2xl border border-gray-800"><div class="text-center mb-6"><i class="fas fa-star text-5xl text-purple-400 mb-4"></i><h3 class="text-2xl font-bold mb-2">Cosmic Awakening</h3><div class="text-5xl font-bold neon-text my-4">€47</div><p class="text-gray-400">Perfect for beginners</p></div><ul class="space-y-3 mb-8 text-left"><li><i class="fas fa-check text-green-400 mr-2"></i> 15-page personalized report</li><li><i class="fas fa-check text-green-400 mr-2"></i> Sun & Moon sign analysis</li><li><i class="fas fa-check text-green-400 mr-2"></i> Basic compatibility insights</li><li><i class="fas fa-check text-green-400 mr-2"></i> Email delivery in 24h</li></ul><button onclick='openCheckout({name:"Cosmic Awakening",price:47,description:"15-page beginner report"})' class="btn-primary w-full py-3 rounded-full">Get Started</button></div><div class="card-3d bg-gradient-to-br from-purple-900 to-pink-900 p-8 rounded-2xl border-2 border-yellow-400 relative transform scale-105"><div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-4 py-1 rounded-full text-sm font-bold">⭐ MOST POPULAR</div><div class="text-center mb-6"><i class="fas fa-gem text-5xl text-yellow-400 mb-4"></i><h3 class="text-2xl font-bold mb-2">Soul Blueprint</h3><div class="text-5xl font-bold text-yellow-400 my-4">€147</div><p class="text-gray-200">Complete deep-dive analysis</p></div><ul class="space-y-3 mb-8 text-left"><li><i class="fas fa-check text-yellow-400 mr-2"></i> 40-page detailed report</li><li><i class="fas fa-check text-yellow-400 mr-2"></i> All planets & houses analyzed</li><li><i class="fas fa-check text-yellow-400 mr-2"></i> Career & relationship guidance</li><li><i class="fas fa-check text-yellow-400 mr-2"></i> Year-ahead forecast</li><li><i class="fas fa-check text-yellow-400 mr-2"></i> Priority 12h delivery</li></ul><button onclick='openCheckout({name:"Soul Blueprint",price:147,description:"40-page complete analysis"})' class="bg-yellow-400 text-black w-full py-3 rounded-full font-bold hover:bg-yellow-300 transition">Get Started</button></div><div class="card-3d bg-gray-900 p-8 rounded-2xl border border-gray-800"><div class="text-center mb-6"><i class="fas fa-crown text-5xl text-purple-400 mb-4"></i><h3 class="text-2xl font-bold mb-2">Destiny Mastery</h3><div class="text-5xl font-bold neon-text my-4">€397</div><p class="text-gray-400">Ultimate transformation</p></div><ul class="space-y-3 mb-8 text-left"><li><i class="fas fa-check text-green-400 mr-2"></i> 80+ page master report</li><li><i class="fas fa-check text-green-400 mr-2"></i> Past life insights</li><li><i class="fas fa-check text-green-400 mr-2"></i> Soul purpose revelation</li><li><i class="fas fa-check text-green-400 mr-2"></i> 1-on-1 video consultation</li><li><i class="fas fa-check text-green-400 mr-2"></i> VIP instant delivery</li></ul><button onclick='openCheckout({name:"Destiny Mastery",price:397,description:"80+ page master report"})' class="btn-primary w-full py-3 rounded-full">Get Started</button></div></div></div></section>
+<div id="checkout-modal" class="modal"><div class="bg-gray-900 p-8 rounded-2xl max-w-2xl w-full mx-4 border-2 border-yellow-400 max-h-[90vh] overflow-y-auto"><div class="flex justify-between items-center mb-6"><h2 class="text-3xl font-bold neon-text">Complete Your Order</h2><button onclick="closeModal('checkout-modal')" class="text-3xl hover:text-red-500">&times;</button></div><div id="checkout-package-info" class="bg-gray-800 p-4 rounded-lg mb-6"></div><form id="checkout-form" class="space-y-4"><div><label class="block mb-2">Full Name *</label><input type="text" name="name" required class="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 focus:border-yellow-400 focus:outline-none"></div><div><label class="block mb-2">Email *</label><input type="email" name="email" required class="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 focus:border-yellow-400 focus:outline-none"></div><div class="grid grid-cols-3 gap-4"><div><label class="block mb-2">Birth Day *</label><input type="number" name="birthDay" min="1" max="31" required class="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 focus:border-yellow-400 focus:outline-none"></div><div><label class="block mb-2">Month *</label><select name="birthMonth" required class="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 focus:border-yellow-400 focus:outline-none"><option value="">Select</option><option value="1">January</option><option value="2">February</option><option value="3">March</option><option value="4">April</option><option value="5">May</option><option value="6">June</option><option value="7">July</option><option value="8">August</option><option value="9">September</option><option value="10">October</option><option value="11">November</option><option value="12">December</option></select></div><div><label class="block mb-2">Year *</label><input type="number" name="birthYear" min="1900" max="2025" required class="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 focus:border-yellow-400 focus:outline-none"></div></div><div><label class="block mb-2">Birth Time (e.g., 14:30)</label><input type="time" name="birthTime" class="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 focus:border-yellow-400 focus:outline-none"></div><div><label class="block mb-2">Birth Place *</label><input type="text" name="birthPlace" required placeholder="City, Country" class="w-full p-3 bg-gray-800 rounded-lg border border-gray-700 focus:border-yellow-400 focus:outline-none"></div><div><label class="block mb-2">Payment Method *</label><div class="space-y-2"><label class="flex items-center p-3 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700"><input type="radio" name="paymentMethod" value="stripe" checked class="mr-3"><i class="fab fa-stripe text-2xl mr-2 text-purple-400"></i><span>Stripe (Card Payment)</span></label><label class="flex items-center p-3 bg-gray-800 rounded-lg cursor-pointer hover:bg-gray-700"><input type="radio" name="paymentMethod" value="revolut" class="mr-3"><i class="fas fa-money-bill-wave text-2xl mr-2 text-blue-400"></i><span>Revolut (Lower Fees - 0.8%)</span></label></div></div><div class="flex items-start"><input type="checkbox" required class="mt-1 mr-3"><label class="text-sm text-gray-400">I agree to the Terms & Conditions and Privacy Policy</label></div><button type="submit" class="btn-primary w-full py-4 rounded-lg text-lg font-bold">Proceed to Payment 🔒</button></form></div></div>
+<div id="success-modal" class="modal"><div class="bg-gray-900 p-8 rounded-2xl max-w-lg w-full mx-4 border-2 border-green-500 text-center"><div class="text-6xl mb-4">🎉</div><h2 class="text-3xl font-bold neon-text mb-4">Order Confirmed!</h2><p class="text-xl mb-6">Thank you for your purchase</p><div id="success-order-details" class="bg-gray-800 p-4 rounded-lg mb-6"></div><button onclick="closeModal('success-modal')" class="btn-primary px-8 py-3 rounded-full">Close</button></div></div>
+<div id="chat-widget"><div id="chat-box"><div class="p-4 border-b border-gray-700 flex justify-between items-center"><h3 class="font-bold">💬 Cosmic Assistant</h3><button onclick="toggleChat()" class="text-2xl">&times;</button></div><div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3"><div class="bg-gray-800 p-3 rounded-lg"><p class="text-sm">👋 Hi! I'm your Cosmic Assistant. Ask me anything about astrology!</p></div></div><div class="p-4 border-t border-gray-700"><div class="flex gap-2"><input type="text" id="chat-input" placeholder="Ask a question..." class="flex-1 p-2 bg-gray-800 rounded-lg border border-gray-700 focus:border-yellow-400 focus:outline-none text-sm"><button onclick="sendChatMessage()" class="btn-primary px-4 py-2 rounded-lg"><i class="fas fa-paper-plane"></i></button></div></div></div><div id="chat-button" onclick="toggleChat()"><i class="fas fa-comments"></i></div></div>
+<script src="/static/app.js"></script>
+</body>
+</html>
   `)
+  
+  return c.html(html)
 })
 
 export default app
