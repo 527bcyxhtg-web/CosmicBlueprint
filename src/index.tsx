@@ -288,9 +288,9 @@ app.get('/api/orders/:orderId/status', async (c) => {
 // FRONTEND ROUTE - Placeholder minimal HTML
 // ============================================
 
-app.get('/', async (c) => {
-  // Read full HTML from file
-  const html = await fetch('https://raw.githubusercontent.com/527bcyxhtg-web/CosmicBlueprint/main/frontend_full.html').then(r => r.text()).catch(() => `
+app.get('/', (c) => {
+  // Serve the main HTML file
+  return c.html(`
 <!DOCTYPE html>
 <html lang="en">
 <head>
