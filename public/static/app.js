@@ -29,48 +29,57 @@ window.closeModal = closeModal;
 // TAROT FUNCTIONS
 // ===================================
 const tarotCards = [
-  { name: 'The Fool', meaning: 'New beginnings, innocence, spontaneity. A fresh start awaits you!' },
-  { name: 'The Magician', meaning: 'Manifestation, resourcefulness, power. You have all the tools you need.' },
-  { name: 'The High Priestess', meaning: 'Intuition, sacred knowledge, divine feminine. Trust your inner voice.' },
-  { name: 'The Empress', meaning: 'Femininity, beauty, nature, abundance. Creativity flows through you.' },
-  { name: 'The Emperor', meaning: 'Authority, structure, control, father figure. Take charge of your life.' },
-  { name: 'The Lovers', meaning: 'Love, harmony, relationships, values alignment. Important choices ahead.' },
-  { name: 'The Chariot', meaning: 'Control, willpower, success, determination. Victory is within reach.' },
-  { name: 'Strength', meaning: 'Courage, persuasion, influence, compassion. Inner strength prevails.' },
-  { name: 'The Hermit', meaning: 'Soul searching, introspection, inner guidance. Time for reflection.' },
-  { name: 'Wheel of Fortune', meaning: 'Good luck, karma, life cycles, destiny. Change is coming.' },
-  { name: 'Justice', meaning: 'Justice, fairness, truth, cause and effect. Balance will be restored.' },
-  { name: 'The Hanged Man', meaning: 'Pause, surrender, letting go, new perspective. Release control.' },
-  { name: 'Death', meaning: 'Endings, change, transformation, transition. Embrace the new chapter.' },
-  { name: 'Temperance', meaning: 'Balance, moderation, patience, purpose. Find your middle path.' },
-  { name: 'The Devil', meaning: 'Shadow self, attachment, addiction, restriction. Break free from chains.' },
-  { name: 'The Tower', meaning: 'Sudden change, upheaval, chaos, revelation. Breakthrough coming.' },
-  { name: 'The Star', meaning: 'Hope, faith, purpose, renewal, spirituality. Your wishes will manifest.' },
-  { name: 'The Moon', meaning: 'Illusion, fear, anxiety, subconscious. Trust the journey.' },
-  { name: 'The Sun', meaning: 'Positivity, fun, warmth, success, vitality. Joy is yours!' },
-  { name: 'Judgement', meaning: 'Judgement, rebirth, inner calling, absolution. Answer your calling.' },
-  { name: 'The World', meaning: 'Completion, accomplishment, travel, achievement. You have arrived!' }
+  { name: 'The Fool', icon: '🃏', meaning: 'New beginnings, innocence, spontaneity. A fresh start awaits you! Step into the unknown with courage and trust.' },
+  { name: 'The Magician', icon: '🎩', meaning: 'Manifestation, resourcefulness, power. You have all the tools you need. Channel your energy into creation.' },
+  { name: 'The High Priestess', icon: '🔮', meaning: 'Intuition, sacred knowledge, divine feminine. Trust your inner voice and the wisdom of the unseen.' },
+  { name: 'The Empress', icon: '👑', meaning: 'Femininity, beauty, nature, abundance. Creativity flows through you. Nurture your dreams into reality.' },
+  { name: 'The Emperor', icon: '⚔️', meaning: 'Authority, structure, control, father figure. Take charge of your life with wisdom and strength.' },
+  { name: 'The Lovers', icon: '💕', meaning: 'Love, harmony, relationships, values alignment. Important choices ahead regarding matters of the heart.' },
+  { name: 'The Chariot', icon: '🏇', meaning: 'Control, willpower, success, determination. Victory is within reach. Push forward with confidence.' },
+  { name: 'Strength', icon: '🦁', meaning: 'Courage, persuasion, influence, compassion. Inner strength prevails over outer challenges.' },
+  { name: 'The Hermit', icon: '🕯️', meaning: 'Soul searching, introspection, inner guidance. Time for reflection and solitude. Seek wisdom within.' },
+  { name: 'Wheel of Fortune', icon: '☸️', meaning: 'Good luck, karma, life cycles, destiny. Change is coming. Embrace the turning of fate\'s wheel.' },
+  { name: 'Justice', icon: '⚖️', meaning: 'Justice, fairness, truth, cause and effect. Balance will be restored. Truth shall prevail.' },
+  { name: 'The Hanged Man', icon: '🙃', meaning: 'Pause, surrender, letting go, new perspective. Release control and see from a different angle.' },
+  { name: 'Death', icon: '💀', meaning: 'Endings, change, transformation, transition. Embrace the new chapter. Rebirth follows every ending.' },
+  { name: 'Temperance', icon: '🍷', meaning: 'Balance, moderation, patience, purpose. Find your middle path. Blend opposing forces harmoniously.' },
+  { name: 'The Devil', icon: '😈', meaning: 'Shadow self, attachment, addiction, restriction. Break free from chains that bind you.' },
+  { name: 'The Tower', icon: '🏰', meaning: 'Sudden change, upheaval, chaos, revelation. Breakthrough coming. Destruction leads to liberation.' },
+  { name: 'The Star', icon: '⭐', meaning: 'Hope, faith, purpose, renewal, spirituality. Your wishes will manifest. Keep faith in the divine.' },
+  { name: 'The Moon', icon: '🌙', meaning: 'Illusion, fear, anxiety, subconscious. Trust the journey through darkness. Intuition guides you.' },
+  { name: 'The Sun', icon: '☀️', meaning: 'Positivity, fun, warmth, success, vitality. Joy is yours! Bask in the radiance of achievement.' },
+  { name: 'Judgement', icon: '📯', meaning: 'Judgement, rebirth, inner calling, absolution. Answer your calling. Rise to your higher purpose.' },
+  { name: 'The World', icon: '🌍', meaning: 'Completion, accomplishment, travel, achievement. You have arrived! Celebrate your journey\'s fulfillment.' }
 ];
 
 window.drawTarot = function() {
   const card = tarotCards[Math.floor(Math.random() * tarotCards.length)];
   const cardElement = document.getElementById('tarot-card');
+  const cardIcon = document.getElementById('tarot-card-icon');
+  const cardTitle = document.getElementById('tarot-card-title');
   const resultElement = document.getElementById('tarot-result');
   const cardNameElement = document.getElementById('tarot-card-name');
   const cardMeaningElement = document.getElementById('tarot-card-meaning');
   
-  if (!cardElement || !resultElement) return;
+  if (!cardElement) return;
   
-  // Animate card flip
+  // Flip card animation
   cardElement.style.transform = 'rotateY(180deg)';
   
   setTimeout(() => {
-    cardElement.style.transform = 'rotateY(0deg)';
-    cardElement.innerHTML = '<i class="fas fa-star"></i>';
+    // Update back of card with drawn card
+    if (cardIcon) cardIcon.textContent = card.icon;
+    if (cardTitle) cardTitle.textContent = card.name;
     
+    // Show result below
     if (cardNameElement) cardNameElement.textContent = card.name;
     if (cardMeaningElement) cardMeaningElement.textContent = card.meaning;
     if (resultElement) resultElement.classList.remove('hidden');
+    
+    // Flip back after 3 seconds
+    setTimeout(() => {
+      cardElement.style.transform = 'rotateY(0deg)';
+    }, 3000);
   }, 300);
 }
 
